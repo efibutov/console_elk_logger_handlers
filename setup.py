@@ -1,13 +1,24 @@
 from setuptools import setup, find_packages
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 setup(
     name='console_elk_logger_handlers',
     version='0.1.0',
     packages=find_packages(),
-    install_requires=requirements,
+    install_requires=[
+        'anyio==4.13.0',
+        'certifi==2026.2.25',
+        'charset-normalizer==3.4.6',
+        'elastic-transport==9.2.1',
+        'elasticsearch==9.3.0',
+        'idna==3.11',
+        'python-dateutil==2.9.0.post0',
+        'requests==2.33.1',
+        'six==1.17.0',
+        'sniffio==1.3.1',
+        'termcolor==3.3.0',
+        'typing_extensions==4.15.0',
+        'urllib3==2.6.3',
+    ],
     author='Efi Butovski',
     description='Simple colored console and ELK logger for Python',
     python_requires='>=3.12',
