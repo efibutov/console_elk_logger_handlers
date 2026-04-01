@@ -38,6 +38,8 @@ class ColorizedConsole(Handler):
         rec = f'[{t}][{record.levelname}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(rec, *color))
         sys.stdout.write('\n')
+        sys.stdout.write(colored('-----------', *color))
+        sys.stdout.write('\n')
         sys.stdout.flush()
 
 
