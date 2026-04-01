@@ -9,6 +9,7 @@ setup(
         'elasticsearch',
         'python-dateutil',
         'termcolor',
+        'requests'
     ],
     author='Efi Butovski',
     description='Simple colored console and ELK logger for Python',
