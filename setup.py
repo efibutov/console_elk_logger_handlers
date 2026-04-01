@@ -12,5 +12,5 @@ setup(
     ],
     author='Efi Butovski',
     description='Simple colored console and ELK logger for Python',
-    python_requires='>=3.12',
+    python_requires='>=3.11',
 )
