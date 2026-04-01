@@ -15,13 +15,12 @@ class ColorizedConsole(Handler):
     '''
     MILLISECOND = 0.001
     LEVEL_COLORS = {
-        'DEBUG': ('grey', ['dark', 'blink']),
+        'DEBUG': ('yellow', ['dark', 'blink']),
         'INFO': ('green', ['dark']),
         'WARNING': ('blue', ['dark']),
         'ERROR': ('red', ['bold', 'underline']),
         'CRITICAL': ('yellow', 'on_black', ['bold', 'underline']),
     }
-    longest_level_name = max(len(key) for key in LEVEL_COLORS.keys())
 
     def __init__(self, level: int=DEBUG, name: str='') -> None:
         super().__init__(level=level)
@@ -36,7 +35,7 @@ class ColorizedConsole(Handler):
         ms = floor(time.microsecond * self.MILLISECOND)
         t = f'{hr:02d}:{minute:02d}:{second:02d}.{ms:01.0f}'
         color = self.LEVEL_COLORS.get(record.levelname, ('white',))
-        rec = f'[{t}][{record.levelname:<{self.longest_level_name}}][{self.__name_field}] {record.msg}'
+        rec = f'[{t}][{record.levelname}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(rec, *color))
         sys.stdout.write('\n')
         sys.stdout.flush()
