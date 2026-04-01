@@ -2,6 +2,7 @@
 Colorized console log handler
 '''
 import sys
+import shutil
 from datetime import datetime as dt
 from math import floor
 from termcolor import colored
@@ -15,11 +16,11 @@ class ColorizedConsole(Handler):
     '''
     MILLISECOND = 0.001
     LEVEL_COLORS = {
-        'DEBUG': ('yellow', ['dark', 'blink']),
-        'INFO': ('green', ['dark']),
+        'DEBUG': ('green', ['dark']),
+        'INFO': ('yellow', ['dark', 'blink']),
         'WARNING': ('blue', ['dark']),
         'ERROR': ('red', ['bold', 'underline']),
-        'CRITICAL': ('yellow', 'on_black', ['bold', 'underline']),
+        'CRITICAL': ('yellow', 'on_black', ['bold']),
     }
 
     def __init__(self, level: int=DEBUG, name: str='') -> None:
@@ -35,10 +36,10 @@ class ColorizedConsole(Handler):
         ms = floor(time.microsecond * self.MILLISECOND)
         t = f'{hr:02d}:{minute:02d}:{second:02d}.{ms:01.0f}'
         color = self.LEVEL_COLORS.get(record.levelname, ('white',))
-        rec = f'[{t}][{record.levelname}][{self.__name_field}] {record.msg}'
+        rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(rec, *color))
         sys.stdout.write('\n')
-        sys.stdout.write(colored('-----------', *color))
+        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, *color))
         sys.stdout.write('\n')
         sys.stdout.flush()
 
