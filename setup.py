@@ -5,7 +5,7 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     install_requires=[
-        'anyio==4.13.0',
+        'anyio>=4.12.0',
         'certifi==2026.2.25',
         'charset-normalizer==3.4.6',
         'elastic-transport==9.2.1',
