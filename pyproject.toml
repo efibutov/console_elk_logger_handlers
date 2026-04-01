@@ -1,12 +1,18 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "console_elk_logger_handlers_efibutov"
+name = "console_elk_logger_handlers"
 version = "0.0.1"
+dependencies = []
+requires-python = ">=3.9"
 authors = [
   { name="Efi Butovski", email="efibutov@gmail.com" },
 ]
-description = "ELK and colorized console handlers"
 readme = "README.md"
-requires-python = ">=3.9"
+
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
