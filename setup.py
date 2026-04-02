@@ -10,7 +10,7 @@ setup(
         'termcolor>=1.0.0',
         'anyio',
         'certifi==2026.2.25',
-        'charset-normalizer==3.4.6',
+        'charset-normalizer',
         'coloredlogs==15.0.1',
         'elastic-transport==9.2.1',
         'humanfriendly==10.0',
