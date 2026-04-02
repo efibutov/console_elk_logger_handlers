@@ -6,7 +6,7 @@ import shutil
 from datetime import datetime as dt
 from math import floor
 from termcolor import colored
-from logging import getLogger, Handler, DEBUG, ERROR, LogRecord
+from logging import getLogger, Handler, DEBUG, WARNING, INFO, ERROR, LogRecord
 SPACE_SYMBOL = ' '
 
 
@@ -23,7 +23,7 @@ class ColorizedConsole(Handler):
         'CRITICAL': ('yellow', 'on_black', ['bold']),
     }
 
-    def __init__(self, level: int=DEBUG, name: str='') -> None:
+    def __init__(self, level: int=INFO, name: str='') -> None:
         super().__init__(level=level)
         self.setLevel(level)
         self.__name_field = name
