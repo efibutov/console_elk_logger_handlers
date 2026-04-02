@@ -10,7 +10,8 @@
 name = "console_elk_logger_handlers"
 description = "An example package demonstrating how to make one"
 readme = "README.md"
-
+# State that the version will be defined dynamically below.
+dynamic = ["version"]
 authors = [
   { name="Efi Butovski", email="efibutov@gmail.com" },
 ]
@@ -41,8 +42,6 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-# State that the version will be defined dynamically below.
-dynamic = ["version"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
