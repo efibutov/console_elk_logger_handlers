@@ -7,7 +7,7 @@
 
 [project]
 # Thi is simple logging handlers
-name = "log_handlers"
+name = "console_elk_logger_handlers"
 description = "An example package demonstrating how to make one"
 readme = "README.md"
 
@@ -48,3 +48,5 @@ dynamic = ["version"]
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+
