@@ -7,7 +7,7 @@ from requests.auth import HTTPBasicAuth
 class ELKHandler(Handler):
     def __init__(
         self,
-        index='logs',
+        index='probe',
         host='docker-elk-elasticsearch-1',
         port=9200,
         password='changeme'
