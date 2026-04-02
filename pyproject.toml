@@ -7,7 +7,7 @@
 
 [project]
 # Thi is simple logging handlers
-name = "console_elk_logger_handlers"
+name = "log_handlers"
 description = "An example package demonstrating how to make one"
 readme = "README.md"
 
