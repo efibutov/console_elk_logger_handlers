@@ -17,7 +17,6 @@ authors = [
 
 license = "Apache-2.0"
 
-version = "0.0.1"
 
 dependencies = [
   "anyio==4.13.0",
