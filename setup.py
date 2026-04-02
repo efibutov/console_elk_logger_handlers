@@ -8,9 +8,9 @@ setup(
     install_requires=[
         'elasticsearch>=7.0.0',
         'termcolor>=1.0.0',
-        'anyio',
+        'anyio==4.13.0',
         'certifi==2026.2.25',
-        'charset-normalizer',
+        'charset-normalizer==3.4.6',
         'coloredlogs==15.0.1',
         'elastic-transport==9.2.1',
         'humanfriendly==10.0',
