@@ -1,18 +1,16 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='console_elk_logger_handlers',
+    name='console-elk-logger-handlers',
     version='0.1.0',
-    packages=find_packages('console_elk_logger_handlers'),
-    license='MIT',
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     install_requires=[
-        'elastic-transport',
-        'elasticsearch',
-        'python-dateutil',
-        'termcolor',
+        'elasticsearch>=7.0.0',
+        'termcolor>=1.0.0',
     ],
     author='Efi Butovski',
-    author_email='efibutov@gmail.com',
     description='Simple colored console and ELK logger for Python',
-    python_requires='>=3.11',
+    license='MIT',
+    python_requires='>=3.8',
 )
