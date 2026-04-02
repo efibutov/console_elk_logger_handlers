@@ -1,17 +1,23 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+# This file configures the project for packaging, and can also hold other
+# tools' configuration settings.
+#
+# More details about what can go in this file:
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+
 
 [project]
+# Thi is simple logging handlers
 name = "console_elk_logger_handlers"
 description = "An example package demonstrating how to make one"
 readme = "README.md"
-version = "0.0.1"
+
 authors = [
   { name="Efi Butovski", email="efibutov@gmail.com" },
 ]
 
 license = "Apache-2.0"
+
+version = "0.0.1"
 
 dependencies = [
   "anyio==4.13.0",
@@ -39,9 +45,7 @@ classifiers = [
 # State that the version will be defined dynamically below.
 dynamic = ["version"]
 
-[project.urls]
-# These URLs are displayed in a sidebar on PyPI. You don't have to have them,
-# but they can help people learn more about your project. You can include as
-# many named URLs as you want.  They can be any URL, not just to GitHub.
-"Source code" = "https://github.com/nedbat/pkgsample"
-"Issue tracker" = "https://github.com/nedbat/pkgsample/issues"
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
