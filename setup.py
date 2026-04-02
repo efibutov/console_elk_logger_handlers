@@ -8,7 +8,7 @@ setup(
     install_requires=[
         'elasticsearch>=7.0.0',
         'termcolor>=1.0.0',
-        'anyio==4.13.0',
+        'anyio',
         'certifi==2026.2.25',
         'charset-normalizer==3.4.6',
         'coloredlogs==15.0.1',
