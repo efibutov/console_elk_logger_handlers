@@ -8,7 +8,7 @@ class ELKHandler(Handler):
     def __init__(
         self,
         index='logs',
-        host='127.0.0.1',
+        host='docker-elk-elasticsearch-1',
         port=9200,
         password='changeme'
     ):
