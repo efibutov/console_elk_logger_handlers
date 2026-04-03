@@ -8,7 +8,7 @@ class ELKHandler(Handler):
     def __init__(
         self,
         index='probe',
-        host='docker-elk-elasticsearch-1',
+        host='localhost',
         port=9200,
         password='changeme'
     ):
@@ -33,3 +33,17 @@ class ELKHandler(Handler):
             requests.post(self.url, json=doc, auth=self.auth)
         except Exception as e:
             print(f"ELK error: {e}")
+
+
+# from logging import getLogger, DEBUG
+# logger = getLogger('handler test')
+# logger.setLevel(DEBUG)
+# logger.addHandler(
+#     ELKHandler(
+#         index='probe',
+#         host='localhost',
+#         port=9200,
+#         password='changeme'
+#     )
+# )
+# logger.warning('++++++++++++++++++++++++')
