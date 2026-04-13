@@ -48,16 +48,18 @@ class ColorizedConsole(Handler):
         sys.stdout.write(colored(f' | ', 'white'))
         sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
         sys.stdout.write(colored(f' | ', 'white'))
+        sys.stdout.write(colored(f'{self.__name_field}', 'blue'))
+        sys.stdout.write(colored(f' - ', 'white'))
+        sys.stdout.write(colored(f'{record.lineno}', 'red'))
+        sys.stdout.write(colored(f' | ', 'white'))
         sys.stdout.write(colored(f'{record.msg}', 'white'))
+        sys.stdout.write(colored(f'\n', 'white'))
+        sys.stdout.write('\n')
+        sys.stdout.write(colored(f'{record.pathname}:{record.lineno}', 'red'))
         sys.stdout.write('\n')
         sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "dark_grey"))
         sys.stdout.write('\n')
         sys.stdout.flush()
-        """
-        sys.stdout.write(colored(f'MESSAGE', 'yellow', 'on_cyan'))
-        sys.stdout.write('\n')
-        sys.stdout.flush()
-        """
 
 
 def test_handler():
