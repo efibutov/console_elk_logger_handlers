@@ -49,9 +49,10 @@ class ColorizedConsole(Handler):
         sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
         sys.stdout.write(colored(f' | ', 'white'))
         sys.stdout.write(colored(f'{record.msg}', 'white'))
-        sys.stdout.flush()
         sys.stdout.write('\n')
         sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "dark_grey"))
+        sys.stdout.write('\n')
+        sys.stdout.flush()
         """
         sys.stdout.write(colored(f'MESSAGE', 'yellow', 'on_cyan'))
         sys.stdout.write('\n')
