@@ -16,14 +16,14 @@ class ColorizedConsole(Handler):
     '''
     MILLISECOND = 0.001
     LEVEL_COLORS = {
-        'DEBUG': ('green', ['dark']),
-        'INFO': ('yellow', ['dark', 'blink']),
+        'DEBUG': ('green', ['dark', 'on_blue']),
+        'INFO': ('white', ['dark', 'blink']),
         'WARNING': ('blue', ['dark']),
-        'ERROR': ('red', ['bold', 'underline']),
-        'CRITICAL': ('yellow', 'on_black', ['bold']),
+        'ERROR': ('black', 'on_yellow', ['bold', 'underline']),
+        'CRITICAL': ('yellow', ['bold', 'on_black']),
     }
 
-    def __init__(self, level: int=INFO, name: str='') -> None:
+    def __init__(self, level: int=DEBUG, name: str='') -> None:
         super().__init__(level=level)
         self.setLevel(level)
         self.__name_field = name
@@ -34,26 +34,43 @@ class ColorizedConsole(Handler):
         minute = time.minute
         second = time.second
         ms = floor(time.microsecond * self.MILLISECOND)
+
+        if ms < 10:
+            ms *= 100
+        elif ms < 100:
+            ms *= 10
+
+
         t = f'{hr:02d}:{minute:02d}:{second:02d}.{ms:01.0f}'
-        color = self.LEVEL_COLORS.get(record.levelname, ('white',))
+        color = self.LEVEL_COLORS.get(record.levelname, ('blue',))
         rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
-        sys.stdout.write(colored(rec, *color))
+        sys.stdout.write(colored(f'{t}', 'white', attrs=['bold',]))
+        sys.stdout.write(colored(f' | ', 'white'))
+        sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
+        sys.stdout.write(colored(f' | ', 'white'))
+        sys.stdout.write(colored(f'{record.msg}', 'white'))
+        sys.stdout.flush()
         sys.stdout.write('\n')
-        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, *color))
+        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "dark_grey"))
+        """
+        sys.stdout.write(colored(f'MESSAGE', 'yellow', 'on_cyan'))
         sys.stdout.write('\n')
         sys.stdout.flush()
+        """
 
 
 def test_handler():
     logger = getLogger(__name__)
-    logger.setLevel(DEBUG)
     logger.addHandler(ColorizedConsole(name='Agent'))
+    logger.setLevel(DEBUG)
 
     logger.debug('debug info')
     logger.info('Just info')
     logger.warning('Be careful!')
     logger.error('Hey! It\'s error')
     logger.critical('No SPACE LEFT!')
+    print('\n\n')
 
 if __name__ == '__main__':
-    test_handler()
+    # test_handler()
+    pass
