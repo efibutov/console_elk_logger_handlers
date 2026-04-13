@@ -57,7 +57,7 @@ class ColorizedConsole(Handler):
         sys.stdout.write('\n')
         sys.stdout.write(colored(f'{record.pathname}:{record.lineno}', 'red'))
         sys.stdout.write('\n')
-        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "dark_grey"))
+        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "blue"))
         sys.stdout.write('\n')
         sys.stdout.flush()
 
@@ -75,5 +75,5 @@ def test_handler():
     print('\n\n')
 
 if __name__ == '__main__':
-    # test_handler()
+    test_handler()
     pass
