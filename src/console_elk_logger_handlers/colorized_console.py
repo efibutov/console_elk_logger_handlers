@@ -46,10 +46,10 @@ class ColorizedConsole(Handler):
         color = self.LEVEL_COLORS.get(record.levelname, ('blue',))
         rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(f'{t}', 'white', attrs=['bold',]))
-        sys.stdout.write(colored(f' | ', 'white'))
+        sys.stdout.write(colored(f' [', 'white'))
         sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
-        sys.stdout.write(colored(f' | ', 'white'))
-        sys.stdout.write(colored(f'{self.__name_field}', 'blue'))
+        sys.stdout.write(colored(f'] ', 'white'))
+        sys.stdout.write(colored(f'{self.__name_field}', 'black', "on_cyan"))
 
         if os.environ.get('TERM_PROGRAM') != 'vscode':
             sys.stdout.write(colored(f' - ', 'white'))
@@ -57,10 +57,10 @@ class ColorizedConsole(Handler):
 
         sys.stdout.write(colored(f' | ', 'white'))
         sys.stdout.write(colored(f'{record.msg}', 'white'))
-        sys.stdout.write(colored(f'\n', 'white'))
         sys.stdout.write('\n')
 
         if os.environ.get('TERM_PROGRAM') == 'vscode':
+            sys.stdout.write('\n')
             sys.stdout.write(colored(f'{record.pathname}:{record.lineno}', 'red'))
             sys.stdout.write('\n')
 
