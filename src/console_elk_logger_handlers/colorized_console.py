@@ -24,10 +24,11 @@ class ColorizedConsole(Handler):
         'CRITICAL': ('yellow', ['bold', 'on_black']),
     }
 
-    def __init__(self, level: int=DEBUG, name: str='') -> None:
+    def __init__(self, level: int=DEBUG, name: str='', line_divider='*') -> None:
         super().__init__(level=level)
         self.setLevel(level)
         self.__name_field = name
+        self.__line_divider = line_divider
 
     def emit(self, record: LogRecord):
         time = dt.fromtimestamp(record.created).time()
@@ -45,11 +46,11 @@ class ColorizedConsole(Handler):
         t = f'{hr:02d}:{minute:02d}:{second:02d}.{ms:01.0f}'
         color = self.LEVEL_COLORS.get(record.levelname, ('blue',))
         rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
-        sys.stdout.write(colored(f'{t}', 'white', attrs=['bold',]))
+        sys.stdout.write(colored(f'{t}', 'green', attrs=['bold',]))
         sys.stdout.write(colored(f' [', 'white'))
         sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
         sys.stdout.write(colored(f'] ', 'white'))
-        sys.stdout.write(colored(f'{self.__name_field}', 'black', "on_cyan"))
+        sys.stdout.write(colored(f'{self.__name_field}', 'light_blue', attrs=["bold",]))
 
         if os.environ.get('TERM_PROGRAM') != 'vscode':
             sys.stdout.write(colored(f' - ', 'white'))
@@ -64,14 +65,21 @@ class ColorizedConsole(Handler):
             sys.stdout.write(colored(f'{record.pathname}:{record.lineno}', 'red'))
             sys.stdout.write('\n')
 
-        sys.stdout.write(colored('-' * shutil.get_terminal_size().columns, "blue"))
+        if self.__line_divider:
+            sys.stdout.write(
+                colored(
+                    self.__line_divider * shutil.get_terminal_size().columns,
+                    "blue"
+                )
+            )
+
         sys.stdout.write('\n')
         sys.stdout.flush()
 
 
 def test_handler():
     logger = getLogger(__name__)
-    logger.addHandler(ColorizedConsole(name='Agent'))
+    logger.addHandler(ColorizedConsole(name='Agent', line_divider='*'))
     logger.setLevel(DEBUG)
 
     logger.debug('debug info')
@@ -79,6 +87,7 @@ def test_handler():
     logger.warning('Be careful!')
     logger.error('Hey! It\'s error')
     logger.critical('No SPACE LEFT!')
+    logger.exception('No network!')
     print('\n\n')
 
 if __name__ == '__main__':
