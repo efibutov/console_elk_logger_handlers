@@ -17,11 +17,11 @@ class ColorizedConsole(Handler):
     '''
     MILLISECOND = 0.001
     LEVEL_COLORS = {
-        'DEBUG': ('green', ['dark', 'on_blue']),
-        'INFO': ('white', ['dark', 'blink']),
-        'WARNING': ('blue', ['dark']),
-        'ERROR': ('black', 'on_yellow', ['bold', 'underline']),
-        'CRITICAL': ('yellow', ['bold', 'on_black']),
+        'DEBUG': ('green', ['dark', 'bold']),
+        'INFO': ('white', ['dark', 'bold']),
+        'WARNING': ('red', ['dark', 'bold']),
+        'ERROR': ('yellow', 'on_black', ['dark', 'bold']),
+        'CRITICAL': ('yellow', 'on_black', ['dark', 'bold']),
     }
 
     def __init__(self, level: int=DEBUG, name: str='', line_divider='*') -> None:
@@ -29,6 +29,7 @@ class ColorizedConsole(Handler):
         self.setLevel(level)
         self.__name_field = name
         self.__line_divider = line_divider
+        self.__max_levelname_len = max([len(levelname) for levelname in self.LEVEL_COLORS])
 
     def emit(self, record: LogRecord):
         time = dt.fromtimestamp(record.created).time()
@@ -47,10 +48,10 @@ class ColorizedConsole(Handler):
         color = self.LEVEL_COLORS.get(record.levelname, ('blue',))
         rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(f'{t}', 'green', attrs=['bold',]))
-        sys.stdout.write(colored(f' [', 'white'))
-        sys.stdout.write(colored(f'{record.levelname[0:3]}', *color))
-        sys.stdout.write(colored(f'] ', 'white'))
-        sys.stdout.write(colored(f'{self.__name_field}', 'light_blue', attrs=["bold",]))
+        sys.stdout.write(colored(f' |', 'white'))
+        sys.stdout.write(colored(f'{record.levelname}' + " " * (self.__max_levelname_len - len(record.levelname)), *color))
+        sys.stdout.write(colored(f'| ', 'white'))
+        sys.stdout.write(colored(f'[{self.__name_field}]', 'black', "on_yellow", attrs=["bold",]))
 
         if os.environ.get('TERM_PROGRAM') != 'vscode':
             sys.stdout.write(colored(f' - ', 'white'))
@@ -91,5 +92,5 @@ def test_handler():
     print('\n\n')
 
 if __name__ == '__main__':
-    # test_handler()
+    test_handler()
     pass
