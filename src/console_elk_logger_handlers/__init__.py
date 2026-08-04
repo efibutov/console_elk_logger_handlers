@@ -14,14 +14,14 @@ def get_common_loggers(
     LOGGER = getLogger(name=name)
     LOGGER.addHandler(ColorizedConsole(name=name))
     LOGGER.setLevel(default_level)
-    LOGGER.addHandler(
+    """ LOGGER.addHandler(
         ELKHandler(
             index=elk_index,
             host=elk_host,
             port=elk_port,
             password=password
         )
-    )
+    ) """
     return LOGGER
 
 __all__ = ['ELKHandler', 'ColorizedConsole', 'get_common_loggers']

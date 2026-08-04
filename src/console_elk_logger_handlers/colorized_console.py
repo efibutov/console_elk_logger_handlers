@@ -58,10 +58,11 @@ class ColorizedConsole(Handler):
             sys.stdout.write(colored(f'{record.lineno}', 'red'))
 
         sys.stdout.write(colored(f' | ', 'white'))
-        sys.stdout.write(colored(f'{record.msg}', 'white'))
+        sys.stdout.write(colored(f'\n{record.msg}', 'white'))
         sys.stdout.write('\n')
 
-        if os.environ.get('TERM_PROGRAM') == 'vscode':
+        # if os.environ.get('TERM_PROGRAM') == 'vscode':
+        if False:
             sys.stdout.write('\n')
             sys.stdout.write(colored(f'{record.pathname}:{record.lineno}', 'red'))
             sys.stdout.write('\n')
@@ -92,5 +93,5 @@ def test_handler():
     print('\n\n')
 
 if __name__ == '__main__':
-    # test_handler()
+    test_handler()
     pass
