@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from logging import Handler, LogRecord
+
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -34,6 +35,12 @@ class ELKHandler(Handler):
         except Exception as e:
             print(f"ELK error: {e}")
 
+
+# ===========================
+# This is a test function to demonstrate how to use the ELKHandler. It creates
+# a logger, adds the ELKHandler to it, and logs a warning message. This
+# function is intended for testing purposes only and should not be used in
+# production code.
 
 # from logging import getLogger, DEBUG
 # logger = getLogger('handler test')

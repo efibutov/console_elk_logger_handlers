@@ -1,4 +1,5 @@
-from logging import getLogger, DEBUG
+from logging import DEBUG, getLogger
+
 from .colorized_console import ColorizedConsole
 from .elk_handler import ELKHandler
 
@@ -24,4 +25,4 @@ def get_common_loggers(
     )
     return LOGGER
 
-__all__ = ['ELKHandler', 'ColorizedConsole', 'get_common_loggers']
+__all__ = ['ColorizedConsole', 'ELKHandler', 'get_common_loggers']

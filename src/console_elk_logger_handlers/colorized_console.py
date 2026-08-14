@@ -2,12 +2,15 @@
 Colorized console log handler
 '''
 import os
-import sys
 import shutil
+import sys
 from datetime import datetime as dt
+from logging import DEBUG, Handler, LogRecord, getLogger
 from math import floor
+from typing import ClassVar
+
 from termcolor import colored
-from logging import getLogger, Handler, DEBUG, WARNING, INFO, ERROR, LogRecord
+
 SPACE_SYMBOL = ' '
 
 
@@ -16,7 +19,7 @@ class ColorizedConsole(Handler):
     Colorized console log handler
     '''
     MILLISECOND = 0.001
-    LEVEL_COLORS = {
+    LEVEL_COLORS: ClassVar[dict[str, tuple]] = {
         'DEBUG': ('green', ['dark', 'bold']),
         'INFO': ('white', ['dark', 'bold']),
         'WARNING': ('red', ['dark', 'bold']),
@@ -32,7 +35,7 @@ class ColorizedConsole(Handler):
         self.__max_levelname_len = max([len(levelname) for levelname in self.LEVEL_COLORS])
 
     def emit(self, record: LogRecord):
-        time = dt.fromtimestamp(record.created).time()
+        time = dt.fromtimestamp(record.created, tz=dt.now().astimezone().tzinfo).time()
         hr = time.hour
         minute = time.minute
         second = time.second
@@ -46,18 +49,17 @@ class ColorizedConsole(Handler):
 
         t = f'{hr:02d}:{minute:02d}:{second:02d}.{ms:01.0f}'
         color = self.LEVEL_COLORS.get(record.levelname, ('blue',))
-        rec = f'[{t}][{record.levelname[0]}][{self.__name_field}] {record.msg}'
         sys.stdout.write(colored(f'{t}', 'green', attrs=['bold',]))
-        sys.stdout.write(colored(f' |', 'white'))
+        sys.stdout.write(colored(' |', 'white'))
         sys.stdout.write(colored(f'{record.levelname}' + " " * (self.__max_levelname_len - len(record.levelname)), *color))
-        sys.stdout.write(colored(f'| ', 'white'))
+        sys.stdout.write(colored('| ', 'white'))
         sys.stdout.write(colored(f'[{self.__name_field}]', 'black', "on_yellow", attrs=["bold",]))
 
         if os.environ.get('TERM_PROGRAM') != 'vscode':
-            sys.stdout.write(colored(f' - ', 'white'))
+            sys.stdout.write(colored(' - ', 'white'))
             sys.stdout.write(colored(f'{record.lineno}', 'red'))
 
-        sys.stdout.write(colored(f' | ', 'white'))
+        sys.stdout.write(colored(' | ', 'white'))
         sys.stdout.write(colored(f'\n{record.msg}', 'white'))
         sys.stdout.write('\n')
 
@@ -93,5 +95,5 @@ def test_handler():
     print('\n\n')
 
 if __name__ == '__main__':
+    # Use it for testing the handler only, not for production
     test_handler()
-    pass
